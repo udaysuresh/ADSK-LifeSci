@@ -1,0 +1,19 @@
+FROM ubuntu:14.04
+RUN apt-get update
+RUN apt-get install -y build-essential
+RUN apt-get install -y make
+ADD glimmer302b.tar.gz /
+#ADD tpall.fna /
+#ADD from-scratch.icm /
+WORKDIR /glimmer3.02/src
+RUN make
+#WORKDIR /glimmer3.02/bin
+##ENTRYPOINT ["/glimmer3.02/bin/glimmer3"]
+WORKDIR /
+#CMD ["/glimmer3.02/bin/glimmer3 /tpall.fna /from-scratch.icm from-scratch"]
+
+#docker build -t glimmer .
+
+#docker run -ti -v /Users/t_sureu/onboard/docker/glimmer3/sample-run:/testdir -v $PWD/test:/test -w /testdir glimmer  /glimmer3.02/bin/glimmer3 /testdir/tpall.fna /testdir/from-scratch.icm /test/help
+
+#/testdir/tpall.fna /testdir/from-scratch.icm /test/help
