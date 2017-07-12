@@ -10,7 +10,7 @@ const fileName = 'output.js';
 
 //only for csv files
 const files = ['../mydata/TEST'];
-const columns = ['number', 'start', 'stop', 'alignment', 'score'];
+const columns = ['number', 'start', 'stop', 'alignment', 'match', 'direction', 'computed'];
 
 Promise.all(files.map(fileName => readFile(fileName).then(parseFile)))
 .then(dataArrays => {
@@ -61,7 +61,9 @@ function parseFile(text) {
         start: parseInt(obj.start, 10),
         stop: parseInt(obj.stop, 10),
         alignment: parseFloat(obj.alignment),
-        score: parseFloat(obj.score),
+        direction: parseFloat(obj.alignment) > 0 ? '+' : '-',
+        match: parseFloat(obj.match),
+        computed: 'Glimmer3'
       });
     });
 
