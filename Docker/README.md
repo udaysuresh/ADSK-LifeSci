@@ -13,3 +13,4 @@ enjoying life, pastries, Dockerfiles, etc.
 
 Note that the `TEST` file now resides in ./mydata
 
+## [Docker Hub](https://hub.docker.com/r/udaysuresh/glimmer/)
