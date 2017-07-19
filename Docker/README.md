@@ -7,7 +7,7 @@ enjoying life, pastries, Dockerfiles, etc.
 
 	docker build -t glimmer .
 
-	docker run -ti -v $PWD/mydata:/test -w /test glimmer /glimmer3.02/bin/long-orfs tpall.fna -n -t 1.15 TEST
+	docker run -ti -v $PWD/mydata:/test -w /test glimmer /glimmer3.02/bin/long-orfs /glimmer3.02/sample-run/tpall.fna -n -t 1.15 TEST
 	
 	docker run -ti -v $PWD/mydata:/test -w /test glimmer /glimmer3.02/bin/glimmer3 /glimmer3.02/sample-run/tpall.fna /glimmer3.02/sample-run/from-scratch.icm TEST
 
