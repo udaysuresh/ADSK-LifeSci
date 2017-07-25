@@ -1,5 +1,4 @@
-# Glimmer3 
-## (Gene Locator and Interpolated Markov ModelER)
+# Glimmer3 (Gene Locator and Interpolated Markov ModelER)
 
 (primitive Markov Models – not HMM)
 
