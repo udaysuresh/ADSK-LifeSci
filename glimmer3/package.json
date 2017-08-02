@@ -1,0 +1,27 @@
+{
+  "name": "glimmer3",
+  "version": "1.0.0",
+  "description": "Run Glimmer3 to find ORFs within sequences larger than 100 basepairs",
+  "author": "Autodesk Life Sciences",
+  "private": true,
+  "geneticConstructor": {
+    "readable": "Glimmer3",
+    "type": "Feature Search",
+    "job": "jobProcessor.js",
+    "client": [
+      {
+        "file": "blockMenuItem.js",
+        "region": "menu:block"
+      }
+    ]
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "constructor-classes": "github:autodesk-lifesciences/constructor-classes",
+    "lodash": "^4.17.4",
+    "csv-parse": "^1.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "bull": "^2.2.3",
+    "debug": "^2.6.3"
+  }
+}
