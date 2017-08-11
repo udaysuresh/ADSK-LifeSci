@@ -13,15 +13,15 @@ outputFile = './../outputs/library.js'
 features = []
 
 #CHOOSE ONE
-
 #fileName = sys.argv[1]
 #USE_ANNOTATIONS = sys.argv[2] #TRUE
 fileName = sys.argv[1]
-USE_ANNOTATIONS = sys.argv[2] #FALSE
-
+USE_ANNOTATIONS = False
+if sys.argv[2] == 'True':
+    USE_ANNOTATIONS = True
 
 # use this to make it a JS file
-MAKE_JS = True
+MAKE_JS = False
 
 for record in SeqIO.parse(fileName, "genbank"):
 
@@ -31,9 +31,17 @@ for record in SeqIO.parse(fileName, "genbank"):
             start = int(feature.location.start)
             end = int(feature.location.end)
             sequence = str(record.seq[start:end])
+            if feature.qualifiers.get('label',''):
+                name = feature.qualifiers.get('label','')[0]
+            elif feature.qualifiers.get('product',''):
+                name = feature.qualifiers.get('product','')[0]
+            elif feature.qualifiers.get('note',''):
+                name = feature.qualifiers.get('note','')[0]
+            else:
+                name = ''
 
             dict = {
-                'name': feature.qualifiers.get('label','')[0],
+                'name': name,
                 'type': str(feature.type),
                 'sequence': str(sequence).translate(None,'#+'),
                 # 'description': str(feature.qualifiers.get('product','')) + str(feature.qualifiers.get('note','')),
@@ -47,7 +55,9 @@ for record in SeqIO.parse(fileName, "genbank"):
         feature = record.features[0]
 
         dict = {
-            'name': record.name[0],
+            #'name': record.name, # use with files direct from gbk/geneious
+            #'name': record.description, #use with plasmids or other files with only one sequence in file
+            'name': record.name if (sys.argv[4] == 'geneious-toggle') else record.description,
             'sequence': (str(record.seq)).translate(None,"#+"),
             'type': str(feature.type),
             # 'id': record.id,
@@ -62,6 +72,9 @@ with open(outputFile, 'r') as f:
 
 # add the list of features to existing list
 config.extend(features)
+
+if sys.argv[3] == 'close':
+    MAKE_JS = True
 
 # write file, optionally making it JS
 with open(outputFile,'w') as f:

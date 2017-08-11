@@ -17,14 +17,14 @@ const run = (filePaths) => {
   .then(dataArrays => _.flatten(_.concat(dataArrays)))
   .then(flatListOfParts => _.reduce(flatListOfParts, (acc, row) => {
     const rowObj = _.zipObject(columns, row);
-    rowObj.sequence = rowObj.sequence.replace(/[^acgt]/gi, '');
+    rowObj.sequence = rowObj.sequence.replace(/[^acgt]/gi, '').toUpperCase();
     acc.push(rowObj);
     return acc;
   }, []))
   .then((annotations) => {
     console.log(annotations);
     const fileHelper = JSON.stringify(annotations, null, 2);
-    Promise.resolve(fs.writeFileSync(fileName, fileHelper));
+    return Promise.resolve(fs.writeFileSync(fileName, fileHelper));
     //makes the file for annotations for genbank/fasta parser to append to
   });
 };
